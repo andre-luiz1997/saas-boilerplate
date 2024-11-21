@@ -1,21 +1,52 @@
 {
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "compilerOptions": {
+    "checkJs": true,
+    "lib": [
+      "es2022",
+      "es6",
+      "DOM"
+    ],
     "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
+    "moduleResolution": "node",
+    "outDir": "./build",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "./*.d.ts"
+    ],
+    "rootDir": "src",
+    "baseUrl": ".",
+    "declaration": true,
+    "removeComments": true,
+    "target": "ES2022",
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@shared/*": [
+        "src/modules/shared/*"
+      ],
+      "@auth/*": [
+        "src/modules/auth/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

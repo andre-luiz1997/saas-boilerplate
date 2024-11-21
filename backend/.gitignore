@@ -1,0 +1,3 @@
+src/infra/env/*
+!src/infra/env/.gitkeep
+!src/infra/env/example.env
