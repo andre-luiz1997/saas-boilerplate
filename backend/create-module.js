@@ -43,7 +43,7 @@ function createModule(moduleName) {
 	fs.writeFileSync(path.join(modulePath, `dtos/${propName}.dto.ts`), `export class ${className}Dto {}`);
 	fs.writeFileSync(
 		path.join(modulePath, `entities/${propName}.entity.ts`),
-		`import type { I${className} } from "@modules/${propName}/types/${propName}";\nimport { type IProvider, ProvidersEnum } from "@shared/providers";\nimport {Types,Schema} from "mongoose"\nexport class ${className}Entity implements I${className} {}\nexport const ${className}Schema = new Schema<${className}Entity>({\n_id: Types.ObjectId,\n})\nexport const ${className}Provider: IProvider = {\nname: ProvidersEnum.${className.toUpperCase()},\nschema: ${className}Schema\n}`,
+		`import type { I${className} } from "@modules/${propName}/types/${propName}";\nimport { type IProvider, ProvidersEnum } from "@shared/providers";\nimport {Types,Schema} from "mongoose"\nexport class ${className}Entity implements I${className} {}\nexport const ${className}Schema = new Schema<${className}Entity>({\n_id: Types.ObjectId,\n},{\n timestamps: true,\n})\nexport const ${className}Provider: IProvider = {\nname: ProvidersEnum.${className.toUpperCase()},\nschema: ${className}Schema\n}`,
 	);
 	fs.writeFileSync(
 		path.join(modulePath, `types/${propName}.ts`),
