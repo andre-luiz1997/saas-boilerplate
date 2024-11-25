@@ -1,10 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 
-function createModule(moduleName) {
-	const modulePath = path.join(__dirname, `src/modules/${moduleName.toLowerCase()}`);
+function kebabToCamelCase(str) {
+	// Remove caracteres inválidos, converte '-' para '_', e transforma em camelCase
+	const snakeCase = str
+			.replace(/[^a-zA-Z-]/g, "") // Remove caracteres não permitidos
+			.replace(/-/g, "_");        // Converte '-' para '_'
+	
+	return snakeCase.replace(/_([a-zA-Z])/g, (_, letter) => letter.toUpperCase());
+}
 
-	const dirs = ['controllers', 'services', 'repositories', 'dtos', 'entities', 'types'];
+function createModule(moduleName) {
+	// Converte kebab para snake case
+	moduleName = kebabToCamelCase(moduleName);        
+	const modulePath = path.join(__dirname, `src/modules/${moduleName}`);
+
+	const dirs = ['controllers', 'services', 'dtos', 'entities', 'types'];
 
 	// Cria os diretórios
 	// biome-ignore lint/complexity/noForEach: <explanation>
@@ -14,7 +25,7 @@ function createModule(moduleName) {
 			fs.mkdirSync(dirPath, { recursive: true });
 		}
 	});
-	const propName = moduleName.toLowerCase();
+	const propName = moduleName;
 	const className = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
 	// Cria arquivos básicos
 	fs.writeFileSync(
